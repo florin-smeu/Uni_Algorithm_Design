@@ -1,0 +1,98 @@
+Nume: FLORIN-ION SMEU					      
+Email: florin.ion.smeu@gmail.com
+Grupa: 322CD 
+Data: 15 apr 2018
+
+
+			          ========================
+			          Proiectarea Algoritmilor
+			  	            . TEMA 1 .
+			          ========================
+
+
+PROBLEMA 1 - Frati
+------------------
+	Am folosit o abordare greedy pentru a rezolva problema. Pentru a 
+asigura o diferenta cat mai mare intre obiectele preferate de cei doi frati, 
+este necesar ca la fiecare pas fiecare frate sa aleaga concursul care are suma 
+premiilor maxima. In cazul in care la un momentdat exista mai multe concursuri
+care au aceeasi suma de premii, Sam va prefera sa aleaga concursul cu cel 
+mai mare numar de benzi desenate, iar Jon concursul cu cel mai mare numar de 
+jocuri video.
+	Implementarea algoritmului a constat in sortarea concursurilor dupa 
+suma maxima a premiilor, iar in caz de suma egala, dupa numarul de jocuri
+video. Apoi, fiecare frate va face alegerea greedy corespunzatoare. Sortarea 
+este de complexitate O(n * logn), iar alegerile se incadreaza in O(n). Deci, in
+total algoritmul are o complexitate O(n * logn).     
+
+PROBLEMA 2 - Ursi
+-----------------
+	Problema a fost rezolvata folosind programarea dinamica. Scopul este sa 
+calculam numarul total de fete zambitoare care se pot forma cu cele n 
+caractere. 
+	Vom crea matricea mat[n][m], unde n reprezinta numarul total de 
+caractere din sir, iar m este numarul de ochi regasiti in sir. Elementul 
+mat[i][j] reprezinta numarul de moduri in care pot fi aranjate primele i 
+caractere astfel incat sa avem j ochi stangi deschisi. Este clar faptul ca 
+mat[n][0] este raspunsul final al problemei: in cate moduri putem aranja n 
+caractere astfel incat sa avem 0 ochi stangi deschisi (numarul de fete 
+zambitoare, cu alte cuvinte).
+	 Recurenta 
+gasita pentru problema este:		
+
+	Initializare: mat[0][0] = 0; 
+		      mat[0][1] = 1;	
+		      mat[0][k] = 0, k = 2..m;	 
+		
+		    /
+		    | mat[i - 1][j] * j, pentru '_'
+	mat[i][j] = |
+ 		    | mat[i - 1][j - 1] +
+		    | mat[i - 1][j + 1] * (j + 1), pentru '^'
+	            \
+	
+	De asemenea, exista urmatoarea exceptie:
+	
+		    /
+		    | mat[i - 1][j + 1] * (j + 1), pentru '^' si j = 0 			 		
+	mat[i][j] = |
+		    | mat[i - 1][j - 1], pentru '^' si j = m - 1			
+		    \
+	
+	Daca intalnim caracterul '_' (iar inainte aveam i - 1 caractere in 
+total si j ochi stangi deschisi), inseamna ca putem sa-l combinam cu oricare 
+din acesti j ochi stangi. Asadar, mat[i][j] = mat[i - 1][j] * j.
+	Daca intalnim caracterul '^', avem doua cazuri:
+		1) Poate fi tot un ochi stang. Va trebui sa luam in considerare
+ca inainte aveam i - 1 caractere in total si j - 1 ochi stangi deschisi.
+		2) Poate fi un ochi drept. Luam in considerare faptul ca sunt 
+j + 1 situatii in care putem avea i - 1 caractere in total si j + 1 ochi 
+stangi deschisi.
+	Asadar in acest caz, mat[i][j] = mat[i - 1][j - 1] + 
+mat[i - 1][j + 1] * (j + 1). 
+
+PROBLEMA 3 - Planificare
+------------------------
+	In rezolvarea problemei am folosit principiul programarii dinamice. 
+La fiecare pas (o noua proba care trebuie distribuita intr-un concurs), 
+trebuie sa ne asiguram ca pierderile sunt minime. Pot adauga proba curenta 
+intr-un nou concurs, sau pot sa incerc sa o combin cu probe adaugate anterior. 
+	Recurenta este urmatoarea:
+	dp[0] = 0 (0 probe distribuite)			    i	
+	
+	dp[i] =   MIN  	(dp[j] + (d - (i - j - 1) * b -    SUM  durate[k]) ^ 3)
+		j=0..i-1				k = j + 1 
+	
+	Aplicare pe exemplu:
+	p = 4; d = 5; b = 1;
+	durate = {3, 1, 2, 4};
+	
+	dp[0] = 0;
+	dp[1] = (5 - 3) ^ 3 = 8;
+	dp[2] = (5 - 3 - 1 - 1) ^ 3 = 0;
+	dp[3] = (5 - 3) ^ 3 + (5 - 1 - 1 - 2) ^ 3 = 8 + 1 = 9;
+	dp[4] = (5 - 3) ^ 3 + (5 - 1 - 1 - 2) ^ 3 + 0 = 8 + 1 + 0 = 9;
+ 
+	Complexitatea algoritmului este O(n ^ 2) (se vor distribui n probe, 
+iar distribuirea unei probe "costa" O(n), deoarece iterez prin vectorul care 
+mentine pierderile minime la fiecare pas - dp). 
