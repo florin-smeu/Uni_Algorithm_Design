@@ -4,10 +4,10 @@ Grupa: 322CD
 Data: 15 apr 2018
 
 
-			          ========================
-			          Proiectarea Algoritmilor
-			  	            . TEMA 1 .
-			          ========================
+			  ========================
+			  Proiectarea Algoritmilor
+			  	 . TEMA 1 .
+			  ========================
 
 
 PROBLEMA 1 - Frati
@@ -54,7 +54,7 @@ gasita pentru problema este:
 	De asemenea, exista urmatoarea exceptie:
 	
 		    /
-		    | mat[i - 1][j + 1] * (j + 1), pentru '^' si j = 0 			 		
+		    | mat[i - 1][j + 1] * (j + 1), pentru '^' si j = 0
 	mat[i][j] = |
 		    | mat[i - 1][j - 1], pentru '^' si j = m - 1			
 		    \
