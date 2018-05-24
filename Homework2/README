@@ -1,0 +1,53 @@
+Nume: Florin-Ion Smeu										  Data: 18 mai 2018
+Grupa: 322CD
+Email: florin.ion.smeu@gmail.com
+
+					
+							   ==========
+							     Grafuri
+							   . TEMA 2 .
+							   ==========
+
+
+	In cadrul temei am ales sa rezolv problemele 1, 2 si 4.
+		
+	PROBLEMA 1 - Minlexbfs
+	----------------------
+	Rezolvarea a constat in sortarea lexicografica a listei de adiacenta a 
+fiecarui nod din graf. In acest mod s-a asigurat faptul ca parcurgerea in 
+latime rezultata va fi cea minima lexicografic. 
+	Complexitatea worst case a algoritmului se obtine atunci cand toate 
+muchiile grafului au un nod comun. De aceasta data ar trebui sa sortam un 
+vector care ar contine E muchii, deci complexitatea va fi O(E * logE).
+
+	PROBLEMA 2 - Disjcnt
+	--------------------
+	Am ales sa rezolv aceasta problema in limbajul Java si am utilizat 
+scheletul de cod din laborator. 
+	Am determinat muchiile critice ale grafului, mai intai, folosind o 
+parcurgere in adancime modificata. Observatia cea mai importanta a fost ca 
+muchiile critice nu fac parte din niciun ciclu. 
+	Algoritmul implementat pentru aceasta parte este cel din cadrul 
+laboratorului. O muchie de intoarcere nu poate sa fie critica, deci vom 
+verifica pentru muchiile de avansare (V - 1 muchii) daca fac parte dintr-un 
+ciclu. Folosim vectorul low[v]: daca din nodul u putem ajunge pe un nivel mai 
+mic sau egal cu nivelul v, atunci muchia (u, v) nu este critica. 
+	Ulterior vom realiza parcurgeri in adancime pentru componentele conexe 
+ramase si vom numara nodurile continute de acestea. Pentru o componenta conexa 
+ramasa, numarul de noduri care respecta cerinta problemei este combinari de n
+luate cate doua, adica (n - 1) * n / 2.
+	Complexitatea algoritmului este O(V + E) (V - nr. noduri, E - nr. muchii), 
+parcurgerile in adancime neinfluentand complexitatea, deoarece necesita O(V) 
+operatii.
+	
+	PROBLEMA 4 - Revedges
+	---------------------
+	Am aplicat algoritmul Floyd-Warshall pentru a rezolva problema. 
+Complexitatea acestuia este O(V ^ 3) (se itereaza de V ori prin cele V ^ 2 
+elemente ale matricei de adiacenta). 
+	Atunci cand am adaugat o muchie (x, y) in matricea de adiacenta a grafului,
+am codificat acest lucru prin mat[x][y] = 0 si mat[y][x] = 1 (ar  trebui sa 
+inversam o muchie pentru a ajunge din nodul y in nodul x). 
+	Raspunsul la intrebarea "cate muchii trebuie inversate pentru a ajunge din
+nodul x in nodul y?" se va regasi in matricea de adiacenta (pe care am aplicat
+Floyd-Warshall) la pozitia mat[x][y].
