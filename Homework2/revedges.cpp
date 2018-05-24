@@ -9,7 +9,7 @@ int main(void)
 	ios_base::sync_with_stdio(false);	
 
 	// Open the I/O files
-    freopen("revedges.in", "r", stdin);
+	freopen("revedges.in", "r", stdin);
 	freopen("revedges.out", "w", stdout);
 
 	int n, m, q;
